@@ -19,6 +19,7 @@
       ./modules/root/greetd.nix
       ./modules/root/fonts.nix
       ./modules/root/scripts.nix
+      ./modules/root/davinci-resolve.nix
     ];
 
   networking.hostName = "nixos";
