@@ -38,6 +38,7 @@
         darkreader
 	tridactyl
 	sidebery
+	sponsorblock
       ];
     };
   };
