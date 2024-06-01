@@ -2,7 +2,7 @@
 
 {
   stylix.base16Scheme = {
-    base00 = "303030";
+    base00 = "181818";
     base01 = "404040";
     base02 = "505050";
     base03 = "b0b0b0";
