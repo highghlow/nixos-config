@@ -11,6 +11,8 @@
 
       ./modules/root/bootloader.nix
       ./modules/root/network.nix
+      ./modules/root/ssh.nix
+      ./modules/root/tailscale.nix
       ./modules/root/locale.nix
       ./modules/root/user.nix
       ./modules/root/pipewire.nix

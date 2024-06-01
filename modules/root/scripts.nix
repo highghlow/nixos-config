@@ -15,7 +15,8 @@ let
     sudo cp -r ~/nixos/* /etc/nixos
     sudo nixos-rebuild switch &> nixos-switch.log || ( cat nixos-switch.log | grep --color error && false )
     gen=$(nixos-rebuild list-generations | grep current)
-    git commit -am "$gen"
+    git add .
+    git commit -m "$gen"
     popd
   '';
 in {
