@@ -39,6 +39,8 @@
       settings = {
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
 	"browser.toolbars.bookmarks.visibility" = "never";
+	"signon.rememberSignons" = false;
+	"browser.startup.homepage" = "moz-extension://1e83d50e-56cd-42c9-a461-950048a88cdd/static/newtab.html";
       };
       extensions = with config.nur.repos.rycee.firefox-addons; [
         darkreader
