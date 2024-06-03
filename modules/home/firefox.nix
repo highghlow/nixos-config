@@ -48,6 +48,38 @@
 	sidebery
 	sponsorblock
       ];
+      bookmarks = [
+        {
+	  name = "NixOS Package Search";
+	  tags = [ "nixos" ];
+	  keyword = ":np";
+	  url = "https://search.nixos.org/packages";
+	}
+	{
+	  name = "home-manager Options Search";
+	  tags = [ "nixos" ];
+	  keyword = ":hmo";
+	  url = "https://home-manager-options.extranix.com";
+	}
+	{
+	  name = "NUR Search";
+	  tags = [ "nixos" ];
+	  keyword = ":nur";
+	  url = "https://nur.nix-community.org/";
+	}
+	{
+	  name = "Youtube";
+	  tags = [];
+	  keyword = ":y";
+	  url = "https://youtube.com";
+	}
+	{
+	  name = "Github";
+	  tags = [];
+	  keyword = ":g";
+	  url = "https://github.com";
+	}
+      ];
     };
   };
 
