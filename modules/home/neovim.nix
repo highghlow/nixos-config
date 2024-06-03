@@ -4,6 +4,10 @@
   programs.nixvim = {
     enable = true;
 
+    extraConfigVim = ''
+      :set number
+    '';
+
     autoCmd = [
       {
 	event = [ "BufEnter" "BufWinEnter" ];
@@ -22,6 +26,24 @@
       vim.cmd([[cnoreabbrev nt NvimTreeFocus]])
       vim.cmd([[tnoremap <C-\><Esc> <C-\><C-n><Cmd>:FloatermHide<CR>]])
       vim.cmd([[noremap <C-\><Esc> <Cmd>:FloatermToggle<CR>]])
+
+      vim.cmd([[:nmap ; <Right>]])
+      vim.cmd([[:nmap l <Up>]])
+      vim.cmd([[:nmap k <Down>]])
+      vim.cmd([[:nmap j <Left>]])
+      vim.cmd([[:nnoremap h ;]])
+
+      vim.cmd([[:vmap ; <Right>]])
+      vim.cmd([[:vmap l <Up>]])
+      vim.cmd([[:vmap k <Down>]])
+      vim.cmd([[:vmap j <Left>]])
+      vim.cmd([[:vnoremap h ;]])
+
+      vim.cmd([[:nnoremap <C-w>; <C-w>l]])
+      vim.cmd([[:nnoremap <C-w>l <C-w>k]])
+      vim.cmd([[:nnoremap <C-w>k <C-w>j]])
+      vim.cmd([[:nnoremap <C-w>j <C-w>h]])
+      vim.cmd([[:nnoremap <C-w>h <C-w>;]])
     '';
 
     plugins = {
