@@ -3,6 +3,9 @@
 {
   programs.firefox = {
     enable = true;
+    package = pkgs.firefox.override {
+      cfg = { enableTridactylNative = true; };
+    };
     policies = {
       DisablePocket = true;
       DisableAccounts = true;
@@ -15,7 +18,6 @@
     profiles.home-manager-configured = {
       isDefault = true;
       userChrome = ''
-/* Hide tab bar */
 #TabsToolbar {
   visibility: collapse !important;
   margin-bottom: 21px !important;
@@ -34,6 +36,10 @@
         default = "Startpage";
         force = true;
       };
+      settings = {
+        "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+	"browser.toolbars.bookmarks.visibility" = "never";
+      };
       extensions = with config.nur.repos.rycee.firefox-addons; [
         darkreader
 	tridactyl
@@ -42,4 +48,27 @@
       ];
     };
   };
+
+  home.file."${config.xdg.configHome}/tridactyl/tridactylrc".text = ''
+    unbind h
+    unbind j
+    unbind k
+    unbind l
+    unbind ;;
+
+    unbind H
+    unbind J
+    unbind K
+    unbind L
+
+    bind j scrollpx -50
+    bind k scrollline 10
+    bind l scrollline -10
+    bind ; scrollpx 50
+
+    bind <C-j> back
+    bind K tabprev
+    bind L tabnext
+    bind <C-;> forward
+  '';
 }
