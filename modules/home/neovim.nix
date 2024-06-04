@@ -103,6 +103,7 @@
       {
 	key = "<Tab>";
 	action = ''
+	  <Cmd>:lua
 	  function(fallback)
 	    if cmp.visible() then
 	      cmp.select_next_item()
