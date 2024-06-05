@@ -12,6 +12,7 @@
     ./modules/home/passwd.nix
     ./modules/home/firefox.nix
     ./modules/home/neovim.nix
+    ./modules/home/polkit-auth.nix
   ];
 
   home.packages = with pkgs; [
