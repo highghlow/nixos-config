@@ -1,5 +1,9 @@
 { lib, config, pkgs, ...}:
 
+let screenshot = (pkgs.writeShellScript "sway-screenshot" ''
+  ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp -d)" - | tee /tmp/screenshot-`date +%d-%m-%YT%H:%M`.png | ${pkgs.wl-clipboard}/bin/wl-copy
+'');
+in
 {
   wayland.windowManager.sway = {
     enable = true;
@@ -20,6 +24,7 @@
         in lib.mkOptionDefault {
           "${mod}+Return" = "exec ${pkgs.alacritty}/bin/alacritty";
           "Menu" = "exec ${conf.menu}";
+	  "Print" = "exec ${screenshot}";
         };
       
       bars = [
