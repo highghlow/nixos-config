@@ -1,7 +1,11 @@
 { lib, config, pkgs, ...}:
 
-let screenshot = (pkgs.writeShellScript "sway-screenshot" ''
+let
+screenshot = (pkgs.writeShellScript "sway-screenshot" ''
   ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp -d)" - | tee /tmp/screenshot-`date +%d-%m-%YT%H:%M`.png | ${pkgs.wl-clipboard}/bin/wl-copy
+'');
+lockscreen = (pkgs.writeShellScript "sway-lockscreen" ''
+  ${pkgs.swaylock} -f -i ~/.local/share/lockscreen.png 
 '');
 in
 {
@@ -39,7 +43,13 @@ in
       };
     };
   };
+
+  home.file.lockscreen = {
+    source = ./images/lockscreen.png;
+    target = ".local/share/sway/lockscreen.png";
+  };
  
+  programs.swaylock.enable = true;
   programs.bemenu = { enable = true; };
 
   programs.waybar = {
