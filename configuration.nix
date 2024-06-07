@@ -20,6 +20,7 @@
       ./modules/root/fonts.nix
       ./modules/root/scripts.nix
       ./modules/root/docker.nix
+      ./modules/root/gparted.nix
     ];
 
   networking.hostName = "nixos";
