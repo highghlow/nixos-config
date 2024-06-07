@@ -13,6 +13,7 @@
     ./modules/home/firefox.nix
     ./modules/home/neovim.nix
     ./modules/home/polkit-auth.nix
+    ./modules/home/lutris.nix
   ];
 
   home.packages = with pkgs; [
