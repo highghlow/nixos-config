@@ -3,9 +3,9 @@
 {
   programs.firefox = {
     enable = true;
-    package = pkgs.firefox.override {
-      cfg = { enableTridactylNative = true; };
-    };
+    nativeMessagingHosts = with pkgs; [
+      tridactyl-native
+    ];
     policies = {
       DisablePocket = true;
       DisableAccounts = true;
