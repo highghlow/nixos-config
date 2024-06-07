@@ -12,6 +12,7 @@
     ./modules/home/passwd.nix
     ./modules/home/firefox.nix
     ./modules/home/neovim.nix
+    ./modules/home/transmission.nix
     ./modules/home/polkit-auth.nix
   ];
 
