@@ -7,4 +7,5 @@
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [];
   };
+  security.pam.services.swaylock = {};
 }

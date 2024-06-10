@@ -1,7 +1,11 @@
 { lib, config, pkgs, ...}:
 
-let screenshot = (pkgs.writeShellScript "sway-screenshot" ''
+let
+screenshot = (pkgs.writeShellScript "sway-screenshot" ''
   ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp -d)" - | tee /tmp/screenshot-`date +%d-%m-%YT%H:%M`.png | ${pkgs.wl-clipboard}/bin/wl-copy
+'');
+lockscreen = (pkgs.writeShellScript "sway-lockscreen" ''
+  ${pkgs.swaylock}/bin/swaylock -f -i ~/.local/share/sway/lockscreen.png 
 '');
 in
 {
@@ -25,6 +29,7 @@ in
           "${mod}+Return" = "exec ${pkgs.alacritty}/bin/alacritty";
           "Menu" = "exec ${conf.menu}";
 	  "Print" = "exec ${screenshot}";
+	  "${mod}+Shift+m" = "exec ${lockscreen}";
         };
       
       bars = [
@@ -39,8 +44,18 @@ in
       };
     };
   };
+
+  home.file.".local/share/sway/lockscreen.png".source = ./images/lockscreen.png;
  
+  programs.swaylock.enable = true;
   programs.bemenu = { enable = true; };
+
+  services.swayidle = {
+    enable = true;
+    timeouts = [
+      { timeout = 300; command = "${lockscreen}"; }
+    ];
+  };
 
   programs.waybar = {
     enable = true;
@@ -99,21 +114,6 @@ in
 
         "clock" = {
           format = "{:%H(%I):%M}";
-        };
-
-        "custom/autolock-status" = {
-          format = "{}";
-          return-type = "json";
-          exec = pkgs.writeShellScript "waybar-autolock-status" ''
-            while true; do
-              if ps -e | grep swayidle > /dev/null; then
-                echo '{"text": "LCK: active", "class": ["alock-active", "alock-status"]}'
-              else
-                echo '{"text": "LCK: stopped", "class": ["alock-stopped", "alock-status"]}'
-              fi
-              sleep 1
-            done;
-          '';
         };
 
         "custom/date" = {
