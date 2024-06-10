@@ -5,7 +5,7 @@ screenshot = (pkgs.writeShellScript "sway-screenshot" ''
   ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp -d)" - | tee /tmp/screenshot-`date +%d-%m-%YT%H:%M`.png | ${pkgs.wl-clipboard}/bin/wl-copy
 '');
 lockscreen = (pkgs.writeShellScript "sway-lockscreen" ''
-  ${pkgs.swaylock} -f -i ~/.local/share/sway/lockscreen.png 
+  ${pkgs.swaylock}/bin/swaylock -f -i ~/.local/share/sway/lockscreen.png 
 '');
 in
 {
