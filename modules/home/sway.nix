@@ -29,6 +29,7 @@ in
           "${mod}+Return" = "exec ${pkgs.alacritty}/bin/alacritty";
           "Menu" = "exec ${conf.menu}";
 	  "Print" = "exec ${screenshot}";
+	  "${mod}+Shift+m" = "exec ${lockscreen}";
         };
       
       bars = [
@@ -48,6 +49,13 @@ in
  
   programs.swaylock.enable = true;
   programs.bemenu = { enable = true; };
+
+  services.swayidle = {
+    enable = true;
+    timeouts = [
+      { timeout = 300; command = "${lockscreen}"; }
+    ];
+  };
 
   programs.waybar = {
     enable = true;
