@@ -14,6 +14,7 @@
     ./modules/home/neovim.nix
     ./modules/home/transmission.nix
     ./modules/home/polkit-auth.nix
+    ./modules/home/virt-manager.nix
   ];
 
   home.packages = with pkgs; [
