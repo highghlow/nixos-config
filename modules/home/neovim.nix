@@ -12,10 +12,6 @@
     
     clipboard.register = "unnamedplus";
 
-
-
-
-
     autoCmd = [
       {
 	event = [ "BufEnter" "BufWinEnter" ];
@@ -110,6 +106,7 @@
 	  };
 	};
       };
+
       trouble.settings = {
 	auto_open = true;
 	auto_close = true;
@@ -122,42 +119,6 @@
 	width = 0.9;
       };
     };
-
-    keymaps = [
-      {
-        key = "<Tab>";
-	action = "<Cmd>:BufferPrevious<CR>";
-      }
-      {
-        key = "<S-Tab>";
-	action = "<Cmd>:BufferNext<CR>";
-      }
-      {
-        key = "<CR>";
-	action = '':lua cmp.mapping.confirm({ select = true })'';
-      }
-      {
-	key = "<Tab>";
-	action = ''
-	  <Cmd>:lua
-	  function(fallback)
-	    if cmp.visible() then
-	      cmp.select_next_item()
-	    elseif luasnip.expandable() then
-	      luasnip.expand()
-	    elseif luasnip.expand_or_jumpable() then
-	      luasnip.expand_or_jump()
-	    elseif check_backspace() then
-	      fallback()
-	    else
-	      fallback()
-	    end
-	  end
-	'';
-	mode = "i";
-      }
-
-    ];
   };
 
   programs.nixvim.colorschemes.base16.colorscheme.base00 = 
