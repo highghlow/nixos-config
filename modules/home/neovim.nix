@@ -4,9 +4,17 @@
   programs.nixvim = {
     enable = true;
 
-    extraConfigVim = ''
-      :set number
-    '';
+    opts = {
+      number = true;
+      scrolloff = 5;
+      signcolumn = "yes";
+    };
+    
+    clipboard.register = "unnamedplus";
+
+
+
+
 
     autoCmd = [
       {
@@ -75,8 +83,36 @@
       };
 
       cmp = {
-        enable = true;
+	enable = true;
 	autoEnableSources = true;
+	settings = {
+	  sources =
+	    [ { name = "nvim_lsp"; } { name = "path"; } { name = "buffer"; } ];
+	  mapping = {
+	    "<M-CR>" = "cmp.mapping.confirm({ select = true })";
+	    "<C-Space>" = "cmp.mapping.complete()";
+	    "<Tab>" = ''
+  cmp.mapping(function(fallback)
+      if cmp.visible() then
+	  cmp.select_next_item()
+      else
+	  fallback()
+      end
+  end, {'i', 's'})'';
+	    "<S-Tab>" = ''
+  cmp.mapping(function(fallback)
+      if cmp.visible() then
+	  cmp.select_prev_item()
+      else
+	  fallback()
+      end
+  end, {'i', 's'})'';
+	  };
+	};
+      };
+      trouble.settings = {
+	auto_open = true;
+	auto_close = true;
       };
 
       floaterm = {
