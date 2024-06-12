@@ -21,6 +21,7 @@
       ./modules/root/scripts.nix
       ./modules/root/docker.nix
       ./modules/root/libvirt.nix
+      ./modules/root/zsh.nix
     ];
 
   networking.hostName = "nixos";

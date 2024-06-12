@@ -15,6 +15,7 @@
     ./modules/home/transmission.nix
     ./modules/home/polkit-auth.nix
     ./modules/home/virt-manager.nix
+    ./modules/home/zsh.nix
   ];
 
   home.packages = with pkgs; [
