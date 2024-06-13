@@ -87,21 +87,23 @@
 	  mapping = {
 	    "<M-CR>" = ''
 cmp.mapping(function(fallback)
-    if cmp.visible() then
-	if luasnip.expandable() then
-	    luasnip.expand()
-	else
-	    cmp.confirm({
-		select = true,
-	    })
-	end
+  luasnip = require("luasnip")
+  if cmp.visible() then
+    if luasnip.expandable() then
+      luasnip.expand()
     else
-	fallback()
+      cmp.confirm({
+	select = true,
+      })
     end
+  else
+    fallback()
+  end
 end)
 '';
 	    "<Tab>" = ''
 cmp.mapping(function(fallback)
+  luasnip = require("luasnip")
   if cmp.visible() then
     cmp.select_next_item()
   elseif luasnip.locally_jumpable(1) then
@@ -113,6 +115,7 @@ end, { "i", "s" })
 '';
 	    "<S-Tab>" = ''
 cmp.mapping(function(fallback)
+  luasnip = require("luasnip")
   if cmp.visible() then
     cmp.select_prev_item()
   elseif luasnip.locally_jumpable(-1) then
