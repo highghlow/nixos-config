@@ -22,7 +22,9 @@
       ./modules/root/docker.nix
       ./modules/root/libvirt.nix
       ./modules/root/zsh.nix
+      ./modules/root/searx.nix
     ];
+
 
   networking.hostName = "nixos";
   time.timeZone = "Europe/Moscow";
