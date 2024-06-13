@@ -46,6 +46,7 @@
 	"privacy.sanitize.sanitizeOnShutdown" = true;
 	"privacy.clearOnShutdown.cookies" = false;
 	"privacy.clearOnShutdown.sessions" = false;
+	"dom.security.https_only_mode" = true;
       };
       extensions = with config.nur.repos.rycee.firefox-addons; [
         ublock-origin
