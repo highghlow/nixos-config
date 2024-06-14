@@ -141,6 +141,10 @@ end, { "i", "s" })
 	width = 0.9;
       };
     };
+
+    highlight = {
+      MatchParen.bg = "#444444";
+    };
   };
 
   programs.nixvim.colorschemes.base16.colorscheme.base00 = 
