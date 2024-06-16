@@ -16,6 +16,7 @@
     ./modules/home/polkit-auth.nix
     ./modules/home/virt-manager.nix
     ./modules/home/zsh.nix
+    ./modules/home/lutris.nix
   ];
 
   home.packages = with pkgs; [
