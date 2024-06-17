@@ -12,6 +12,10 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixvirt = {
+      url = "https://flakehub.com/f/AshleyYakeley/NixVirt/*.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     stylix.url = "github:danth/stylix";
   };
 
@@ -21,6 +25,7 @@
       specialArgs = { inherit inputs; };
       modules = [
 	nur.nixosModules.nur
+	inputs.nixvirt.nixosModules.default
 
         ./colorscheme.nix
         ./configuration.nix
@@ -30,9 +35,11 @@
         home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
+	  home-manager.extraSpecialArgs = {inherit inputs;};
           home-manager.sharedModules = [
             inputs.nixvim.homeManagerModules.nixvim
 	    nur.nixosModules.nur
+	    inputs.nixvirt.homeModules.default
           ];
           home-manager.users.nixer = import ./home.nix;
         }
