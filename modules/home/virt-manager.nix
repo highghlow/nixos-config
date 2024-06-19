@@ -1,7 +1,12 @@
 { config, pkgs, inputs, ... }:
 
+let vm = pkgs.linkFarm "vm" [ {
+	     name = "bin/vm";
+	     path = "${pkgs.virt-manager}/bin/virt-manager";
+	   } ];
+in
 {
-  home.packages = with pkgs; [ virt-manager ];
+  home.packages = with pkgs; [ virt-manager vm ];
   dconf.settings = {
     "org/virt-manager/virt-manager/connections" = {
       autoconnect = ["qemu:///session"];
