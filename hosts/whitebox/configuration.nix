@@ -7,22 +7,22 @@
 {
   imports =
     [
-      ./hardware-configuration.nix
+      ../../hardware-configuration.nix
 
-      ./modules/root/bootloader.nix
-      ./modules/root/network.nix
-      ./modules/root/ssh.nix
-      ./modules/root/tailscale.nix
-      ./modules/root/locale.nix
-      ./modules/root/user.nix
-      ./modules/root/pipewire.nix
-      ./modules/root/greetd.nix
-      ./modules/root/fonts.nix
-      ./modules/root/scripts.nix
-      ./modules/root/docker.nix
-      ./modules/root/libvirt.nix
-      ./modules/root/zsh.nix
-      ./modules/root/searx.nix
+      ../../modules/root/bootloader.nix
+      ../../modules/root/network.nix
+      ../../modules/root/ssh.nix
+      ../../modules/root/tailscale.nix
+      ../../modules/root/locale.nix
+      ../../modules/root/user.nix
+      ../../modules/root/pipewire.nix
+      ../../modules/root/greetd.nix
+      ../../modules/root/fonts.nix
+      ../../modules/root/scripts.nix
+      ../../modules/root/docker.nix
+      ../../modules/root/libvirt.nix
+      ../../modules/root/zsh.nix
+      ../../modules/root/searx.nix
     ];
 
 

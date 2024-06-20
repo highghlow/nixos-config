@@ -23,7 +23,7 @@
 	nur.nixosModules.nur
 
         ./colorscheme.nix
-        ./configuration.nix
+        ./hosts/whitebox/configuration.nix
         ./nogit/configuration.nix
 
         inputs.stylix.nixosModules.stylix
@@ -34,7 +34,7 @@
             inputs.nixvim.homeManagerModules.nixvim
 	    nur.nixosModules.nur
           ];
-          home-manager.users.nixer = import ./home.nix;
+          home-manager.users.nixer = import ./hosts/whitebox/home.nix;
         }
       ];
     };
