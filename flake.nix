@@ -15,28 +15,30 @@
     stylix.url = "github:danth/stylix";
   };
 
-  outputs = { self, nixpkgs, home-manager, nur, ... }@inputs: {
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = { inherit inputs; };
-      modules = [
-	nur.nixosModules.nur
+  outputs = { self, nixpkgs, home-manager, nur, stylix, nixvim, ... }@inputs: {
+    nixosConfigurations = {
+      nixos = nixpkgs.lib.nixosSystem {
+	system = "x86_64-linux";
+	specialArgs = { inherit inputs; };
+	modules = [
+	  nur.nixosModules.nur
+	  stylix.nixosModules.stylix
 
-        ./colorscheme.nix
-        ./hosts/whitebox/configuration.nix
-        ./nogit/configuration.nix
+	  ./colorscheme.nix
+	  ./hosts/whitebox/configuration.nix
+	  ./nogit/configuration.nix
 
-        inputs.stylix.nixosModules.stylix
-        home-manager.nixosModules.home-manager {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.sharedModules = [
-            inputs.nixvim.homeManagerModules.nixvim
-	    nur.nixosModules.nur
-          ];
-          home-manager.users.nixer = import ./hosts/whitebox/home.nix;
-        }
-      ];
+	  home-manager.nixosModules.home-manager {
+	    home-manager.useGlobalPkgs = true;
+	    home-manager.useUserPackages = true;
+	    home-manager.sharedModules = [
+	      nixvim.homeManagerModules.nixvim
+	      nur.nixosModules.nur
+	    ];
+	    home-manager.users.nixer = import ./hosts/whitebox/home.nix;
+	  }
+	];
+      };
     };
   };
 }
