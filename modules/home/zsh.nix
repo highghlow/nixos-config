@@ -5,7 +5,7 @@
     enable = true;
     oh-my-zsh = {
       enable = true;
-      plugins = []; # Using starshipr, so plugins are needed
+      plugins = [];
     };
     shellAliases = {
       makedirs = "mkdir -p";
@@ -17,6 +17,12 @@
       tmxn="${pkgs.tmuxinator}/bin/tmuxinator";
     };
   };
+
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
+
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
