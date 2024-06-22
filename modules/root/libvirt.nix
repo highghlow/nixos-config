@@ -2,6 +2,7 @@
 
 {
   virtualisation.libvirtd.enable = true;
+  virtualisation.spiceUSBRedirection.enable = true;
   virtualisation.libvirt.enable = true; # NixVirt
   programs.virt-manager.enable = true;
   users.users.nixer.extraGroups = [ "libvirtd" ];
