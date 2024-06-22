@@ -13,13 +13,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     stylix.url = "github:danth/stylix";
-    nixos-generators = {
-      url = "github:nix-community/nixos-generators";
+    disko = {
+      url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, nur, stylix, nixvim, nixos-generators, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, nur, stylix, nixvim, disko, ... }@inputs: {
     nixosConfigurations = {
       nixos = nixpkgs.lib.nixosSystem {
 	system = "x86_64-linux";
@@ -43,30 +43,21 @@
 	  }
 	];
       };
-    };
-    packages.x86_64-linux.floatware = nixos-generators.nixosGenerate {
-      system = "x86_64-linux";
-      specialArgs = { inherit inputs; };
-      modules = [
-	nixos-generators.nixosModules.iso
+      touchpc = nixpkgs.lib.nixosSystem {
+	system = "x86_64-linux";
+	specialArgs = { inherit inputs; };
+	modules = [
+	  disko.nixosModules.disko
 
-	nur.nixosModules.nur
-	stylix.nixosModules.stylix
+	  ./hosts/touchpc/configuration.nix
 
-	./colorscheme.nix
-	./hosts/floatware/configuration.nix
-
-	home-manager.nixosModules.home-manager {
-	  home-manager.useGlobalPkgs = true;
-	  home-manager.useUserPackages = true;
-	  home-manager.sharedModules = [
-	    nixvim.homeManagerModules.nixvim
-	    nur.nixosModules.nur
-	  ];
-	  home-manager.users.nixer = import ./hosts/floatware/home.nix;
-	}
-      ];
-      format = "iso";
+	  home-manager.nixosModules.home-manager {
+	    home-manager.useGlobalPkgs = true;
+	    home-manager.useUserPackages = true;
+	    home-manager.users.nixer = import ./hosts/touchpc/home.nix;
+	  }
+	];
+      };
     };
   };
 }

@@ -7,22 +7,21 @@
 {
   imports =
     [
-      ../../modules/root/bootloader.nix
-      ../../modules/root/network.nix
-      ../../modules/root/ssh.nix
-      ../../modules/root/tailscale.nix
+      ../../hardware-configuration.nix
+      ./disk-config.nix
+
+      ../../modules/root/grub.nix
       ../../modules/root/locale.nix
-      ../../modules/root/user.nix
-      ../../modules/root/pipewire.nix
-      ../../modules/root/greetd.nix
-      ../../modules/root/fonts.nix
-      ../../modules/root/scripts.nix
-      ../../modules/root/docker.nix
-      ../../modules/root/libvirt.nix
-      ../../modules/root/zsh.nix
-      ../../modules/root/searx.nix
+      ../../modules/root/gnome.nix
     ];
 
+  users.users.nixer = {
+    isNormalUser = true;
+    description = "nixer";
+    extraGroups = [ "networkmanager" "wheel" ];
+    packages = with pkgs; [];
+    password = "1";
+  };
 
   networking.hostName = "nixos";
   time.timeZone = "Europe/Moscow";
