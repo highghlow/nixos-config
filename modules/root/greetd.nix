@@ -2,6 +2,7 @@
 
 {
   hardware.opengl.enable = true;
+  hardware.opengl.driSupport32Bit = true;
   services.greetd = {
     enable = true;
     settings.default_session = {
