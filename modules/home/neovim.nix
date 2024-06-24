@@ -20,7 +20,7 @@
       }
       {
 	event = [ "BufEnter" "BufWinEnter" ];
-	pattern = [ "*.html" ];
+	pattern = [ "*.html" "*.cs" ];
 	command = "setlocal shiftwidth=4";
       }
 
@@ -75,6 +75,8 @@
 	  };
 	  taplo.enable = true;
 	  pyright.enable = true;
+	  omnisharp.enable = true;
+	  nixd.enable = true;
 	};
       };
 
