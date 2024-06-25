@@ -289,4 +289,6 @@ button:hover {
 }
 '';
   };
+
+  home.packages = with pkgs; [ wl-clipboard ];
 }
