@@ -15,6 +15,7 @@
       ../../modules/root/tailscale.nix
       ../../modules/root/locale.nix
       ../../modules/root/user.nix
+      ../../modules/root/bluetooth.nix
       ../../modules/root/pipewire.nix
       ../../modules/root/greetd.nix
       ../../modules/root/fonts.nix
