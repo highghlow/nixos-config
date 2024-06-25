@@ -1,14 +1,15 @@
 { pkgs, lib, ... }:
 
 let forkgram = pkgs.telegram-desktop.overrideAttrs (old: rec {
-  version = "5.1.7";
-  src = pkgs.fetchFromGitHub {
-    owner = "forkgram";
-    repo = "tdesktop";
-    rev = "v${version}";
-    fetchSubmodules = true;
-    hash = "sha256-OH9+cH5CQyrp4DSKXEMs6csGiH+GAtxJT4P9YidmAcM=";
-  };
+    name = "forkgram";
+    version = "5.1.8";
+    src = pkgs.fetchFromGitHub {
+	    owner = "forkgram";
+	    fetchSubmodules = true;
+	    repo = "tdesktop";
+	    rev = "v${version}";
+	    hash = "sha256-ZLzJak6Rn5/Ys9qTQLdqX0FqwXe3OmjgLSvZPSRloZ8=";
+    };
 });
 in
 {
