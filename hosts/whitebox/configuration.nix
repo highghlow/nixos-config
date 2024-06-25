@@ -23,6 +23,7 @@
       ../../modules/root/libvirt.nix
       ../../modules/root/zsh.nix
       ../../modules/root/searx.nix
+      ../../modules/root/gparted.nix
     ];
 
 

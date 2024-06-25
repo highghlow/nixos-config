@@ -18,6 +18,7 @@
     ../../modules/home/zsh.nix
     ../../modules/home/lutris.nix
     ../../modules/home/discord.nix
+    ../../modules/home/telegram.nix
   ];
 
   home.packages = with pkgs; [
