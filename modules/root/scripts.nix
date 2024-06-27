@@ -1,10 +1,6 @@
 { pkgs, lib, ... }:
 
 let
-  nrun = pkgs.writeShellScriptBin "nrun" ''
-    export NIXPKGS_ALLOW_UNFREE=1
-    nix-shell -p "$(echo $*|cut -d ' ' -f1|tr '\n' ' ')" --run "$*"
-  '';
   edit-nix-config = pkgs.writeShellScriptBin "edit-nix-config" ''
     set -e
     pushd ~/nixos
@@ -20,5 +16,5 @@ let
     popd
   '';
 in {
-  environment.systemPackages = [ nrun edit-nix-config ];
+  environment.systemPackages = [ edit-nix-config ];
 }

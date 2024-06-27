@@ -19,6 +19,7 @@
     ../../modules/home/lutris.nix
     ../../modules/home/discord.nix
     ../../modules/home/telegram.nix
+    ../../modules/home/comma.nix
   ];
 
   home.packages = with pkgs; [
