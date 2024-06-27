@@ -20,5 +20,6 @@ in
     wine64
     wine32
     winetricks
+    prismlauncher
   ];
 }
