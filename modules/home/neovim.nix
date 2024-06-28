@@ -149,6 +149,10 @@ end, { "i", "s" })
     };
   };
 
+  home.packages = with pkgs; [
+    mono
+  ];
+
   programs.nixvim.colorschemes.base16.colorscheme.base00 = 
     lib.mkForce "#181818";
 }
