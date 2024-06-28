@@ -55,6 +55,7 @@
       treesitter.enable = true;
       luasnip.enable = true;
       auto-save.enable = true;
+      autoclose.enable = true;
       nvim-tree.enable = true;
 
       lualine = {
