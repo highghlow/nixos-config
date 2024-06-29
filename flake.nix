@@ -17,9 +17,14 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hw-config = {
+      url = "file:///etc/nixos/hardware-configuration.nix";
+      type = "file";
+      flake = false;
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, nur, stylix, nixvim, disko, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, nur, stylix, nixvim, disko, hw-config, ... }@inputs: {
     nixosConfigurations = {
       nixos = nixpkgs.lib.nixosSystem {
 	system = "x86_64-linux";
@@ -31,6 +36,7 @@
 	  ./colorscheme.nix
 	  ./hosts/whitebox/configuration.nix
 	  ./nogit/configuration.nix
+	  hw-config.outPath
 
 	  home-manager.nixosModules.home-manager {
 	    home-manager.useGlobalPkgs = true;

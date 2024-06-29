@@ -7,8 +7,6 @@
 {
   imports =
     [
-      ../../hardware-configuration.nix
-
       ../../modules/root/bootloader.nix
       ../../modules/root/network.nix
       ../../modules/root/ssh.nix
