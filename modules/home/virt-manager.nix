@@ -33,6 +33,17 @@ in
         });
     }
     {
+      definition = inputs.nixvirt.lib.domain.writeXML (inputs.nixvirt.lib.domain.templates.pc
+        {
+          name = "Windows 7";
+          uuid = "b1b057d1-708b-4b48-bb5f-8d7e998390b9";
+          memory = { count = 16; unit = "GiB"; };
+          storage_vol = { pool = "default"; volume = "win7.qcow2"; };
+	  install_vol = /home/nixer/.local/share/libvirt/isos/win7.iso;
+	  virtio_drive = false;
+        });
+    }
+    {
       definition = inputs.nixvirt.lib.domain.writeXML {
         name = "Mac OS";
 	type = "kvm";
