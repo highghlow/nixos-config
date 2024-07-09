@@ -25,7 +25,9 @@
       ../../modules/root/gparted.nix
       ../../modules/root/nixhelper.nix
     ];
-
+  hardware.opengl.extraPackages = with pkgs; [
+    rocmPackages.clr.icd
+  ];
 
   networking.hostName = "nixos";
   time.timeZone = "Europe/Moscow";
