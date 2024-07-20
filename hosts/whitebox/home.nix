@@ -20,6 +20,8 @@
     ../../modules/home/discord.nix
     ../../modules/home/telegram.nix
     ../../modules/home/comma.nix
+    ../../modules/home/tmux.nix
+    ../../modules/home/alacritty.nix
   ];
 
   home.packages = with pkgs; [
