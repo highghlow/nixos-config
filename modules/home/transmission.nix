@@ -1,5 +1,12 @@
-{ pkgs, ... }:
+{ pkgs, lib, config, ... }:
 
 {
-  home.packages = with pkgs; [ transmission-qt ];
+  options = {
+    mynixos.home.transmission.enable =
+      lib.mkEnableOption "Enable module";
+  };
+
+  config = lib.mkIf config.mynixos.home.transmission.enable {
+    home.packages = with pkgs; [ transmission-qt ];
+  };
 }

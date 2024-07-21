@@ -1,5 +1,12 @@
-{ pkgs, ... }:
+{ pkgs, lib, config, ... }:
 
 {
-  home.packages = [ pkgs.comma ]; 
+  options = {
+    mynixos.home.comma.enable =
+      lib.mkEnableOption "Enable module";
+  };
+
+  config = lib.mkIf config.mynixos.home.comma.enable {
+    home.packages = [ pkgs.comma ]; 
+  };
 }

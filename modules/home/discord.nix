@@ -1,7 +1,14 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
-  home.packages = [
-      pkgs.vesktop
-  ];
+  options = {
+    mynixos.home.discord.enable =
+      lib.mkEnableOption "Enable module";
+  };
+
+  config = lib.mkIf config.mynixos.home.discord.enable {
+    home.packages = [
+	pkgs.vesktop
+    ];
+  };
 }

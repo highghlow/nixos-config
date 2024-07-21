@@ -7,24 +7,30 @@
 {
   imports =
     [
-      ../../modules/root/bootloader.nix
-      ../../modules/root/network.nix
-      ../../modules/root/ssh.nix
-      ../../modules/root/tailscale.nix
-      ../../modules/root/locale.nix
-      ../../modules/root/user.nix
-      ../../modules/root/bluetooth.nix
-      ../../modules/root/pipewire.nix
-      ../../modules/root/greetd.nix
-      ../../modules/root/fonts.nix
-      ../../modules/root/scripts.nix
-      ../../modules/root/docker.nix
-      ../../modules/root/libvirt.nix
-      ../../modules/root/zsh.nix
-      ../../modules/root/searx.nix
-      ../../modules/root/gparted.nix
-      ../../modules/root/nixhelper.nix
+      ../../modules/root/all.nix
     ];
+
+  mynixos = {
+    bundle = {
+      basic = {
+        enable = true;
+	bootloader = "systemd-boot";
+      };
+      remote-control.enable = true;
+      desktop = {
+        enable = true;
+        environment = "sway";
+	bluetooth = true;
+	autologin = true;
+      };
+    };
+
+    docker.enable = true;
+    libvirt.enable = true;
+    searx.enable = true;
+    gparted.enable = true;
+  };
+
   hardware.opengl.extraPackages = with pkgs; [
     rocmPackages.clr.icd
   ];
@@ -36,7 +42,6 @@
   environment.systemPackages = with pkgs; [
     ntfs3g
     vim
-    sway
   ];
 
   system.stateVersion = "23.11";

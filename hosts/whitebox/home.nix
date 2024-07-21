@@ -7,27 +7,35 @@
   imports = [
     ../../nogit/home.nix
 
-    ../../modules/home/git.nix
-    ../../modules/home/sway.nix
-    ../../modules/home/passwd.nix
-    ../../modules/home/firefox.nix
-    ../../modules/home/neovim.nix
-    ../../modules/home/transmission.nix
-    ../../modules/home/polkit-auth.nix
-    ../../modules/home/virt-manager.nix
-    ../../modules/home/zsh.nix
-    ../../modules/home/games.nix
-    ../../modules/home/discord.nix
-    ../../modules/home/telegram.nix
-    ../../modules/home/comma.nix
-    ../../modules/home/tmux.nix
-    ../../modules/home/alacritty.nix
+    ../../modules/home/all.nix
   ];
 
-  home.packages = with pkgs; [
-    neofetch
-    
-  ];
+  mynixos.home = {
+    bundle = {
+      basic.enable = true;
+      desktop = {
+        enable = true;
+	environment = "sway";
+      };
+      neovim = {
+        enable = true;
+	tmux = true;
+	ctrl-semicolon-bypass = true;
+      };
+      apps = {
+        communication = true;
+	games = true;
+	passwd = true;
+	vm = true;
+	transmission = true;
+	firefox = true;
+      };
+    };
+
+    firefox = {
+      search = "searx";
+    };
+  };
 
   home.stateVersion = "23.11";
   programs.home-manager.enable = true;

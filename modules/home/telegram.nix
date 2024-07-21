@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, config, ... }:
 
 let forkgram = pkgs.telegram-desktop.overrideAttrs (old: rec {
     name = "forkgram";
@@ -13,5 +13,12 @@ let forkgram = pkgs.telegram-desktop.overrideAttrs (old: rec {
 });
 in
 {
-  home.packages = [ forkgram ];
+  options = {
+    mynixos.home.telegram.enable =
+      lib.mkEnableOption "Enable module";
+  };
+
+  config = lib.mkIf config.mynixos.home.telegram.enable {
+    home.packages = [ forkgram ];
+  };
 }

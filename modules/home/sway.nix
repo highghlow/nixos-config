@@ -9,153 +9,161 @@ lockscreen = (pkgs.writeShellScript "sway-lockscreen" ''
 '');
 in
 {
-  wayland.windowManager.sway = {
-    enable = true;
-    config = {
-      modifier = "Mod4";
+  options = {
+    mynixos.home.sway.enable =
+      lib.mkEnableOption "Enable module";
+  };
 
-      left = "j";
-      down = "k";
-      up = "l";
-      right = "semicolon";
-      
-      menu = "${pkgs.bemenu}/bin/bemenu-run -H 24 --no-exec | xargs swaymsg exec --";     
- 
-      keybindings =
-        let
-          mod = config.wayland.windowManager.sway.config.modifier;
-          conf = config.wayland.windowManager.sway.config;
-        in lib.mkOptionDefault {
-          "${mod}+Return" = "exec ${pkgs.alacritty}/bin/alacritty";
-          "Menu" = "exec ${conf.menu}";
-	  "Print" = "exec ${screenshot}";
-	  "${mod}+Shift+m" = "exec ${lockscreen}";
-        };
-      
-      bars = [
-        { command = "${pkgs.waybar}/bin/waybar"; }
+  config = lib.mkIf config.mynixos.home.sway.enable {
+    mynixos.home.alacritty.enable = true;
+
+    wayland.windowManager.sway = {
+      enable = true;
+      config = {
+	modifier = "Mod4";
+
+	left = "j";
+	down = "k";
+	up = "l";
+	right = "semicolon";
+	
+	menu = "${pkgs.bemenu}/bin/bemenu-run -H 24 --no-exec | xargs swaymsg exec --";     
+   
+	keybindings =
+	  let
+	    mod = config.wayland.windowManager.sway.config.modifier;
+	    conf = config.wayland.windowManager.sway.config;
+	  in lib.mkOptionDefault {
+	    "${mod}+Return" = "exec ${pkgs.alacritty}/bin/alacritty";
+	    "Menu" = "exec ${conf.menu}";
+	    "Print" = "exec ${screenshot}";
+	    "${mod}+Shift+m" = "exec ${lockscreen}";
+	  };
+	
+	bars = [
+	  { command = "${pkgs.waybar}/bin/waybar"; }
+	];
+   
+	input = {
+	  "type:keyboard" = {
+	    xkb_layout = "us,ru";
+	    xkb_options = "grp:alt_shift_toggle,caps:escape";
+	  };
+	};
+      };
+    };
+
+    home.file.".local/share/sway/lockscreen.png".source = ./images/lockscreen.png;
+   
+    programs.swaylock.enable = true;
+    programs.bemenu = { enable = true; };
+
+    services.swayidle = {
+      enable = true;
+      timeouts = [
+	{ timeout = 300; command = "${lockscreen}"; }
       ];
- 
-      input = {
-        "type:keyboard" = {
-          xkb_layout = "us,ru";
-          xkb_options = "grp:alt_shift_toggle,caps:escape";
-        };
-      };
-    };
-  };
-
-  home.file.".local/share/sway/lockscreen.png".source = ./images/lockscreen.png;
- 
-  programs.swaylock.enable = true;
-  programs.bemenu = { enable = true; };
-
-  services.swayidle = {
-    enable = true;
-    timeouts = [
-      { timeout = 300; command = "${lockscreen}"; }
-    ];
-  };
-
-  programs.waybar = {
-    enable = true;
-    settings = {
-      mainBar = {
-        layer = "bottom";
-        positiion = "top";
-        
-        modules-left = [ "sway/workspaces" ];
-        modules-center = [ "sway/window" ];
-        modules-right = [ "custom/autolock-status" "custom/netcheck" "network#wifi" "network#ethernet" "network#disconnected" "pulseaudio" "memory" "cpu" "battery" "custom/date" "clock" "custom/uname" ];
-  
-        "cpu" = {
-          format = "CPU: {usage}%";
-        };
-
-        "memory" = {
-          format = "RAM: {used:0.1f}G/{total:0.1f}G ({percentage}%)";
-          states = {
-            "warning" = 70;
-            "critical" = 90;
-          };
-        };
-
-        "battery" = {
-          format = "BAT: {capacity}%";
-          format-charging = "CHR: {capacity}%";
-          format-plugged = "PLG: {capacity}%";
-        };
-
-        "network#ethernet" = {
-          interface = "enp*";
-          format-ethernet = "ETHER";
-          format-wifi = "";
-          format-disconnected = "";
-          format-linked = "";
-        };
-
-        "network#wifi" = {
-          interface = "wlp*";
-          format-ethernet = "";
-          format-wifi = "WIFI = {essid} ({signalStrength}%)";
-          format-disconnected = "";
-        };
-
-        "network#disconnected" = {
-          format-ethernet = "";
-          format-wifi = "";
-          format-disconnected = "NOCON";
-        };
-
-        "pulseaudio" = {
-          format = "VOL: {volume}%";
-          format-muted = "MUT: {volume}%";
-        };
-
-        "clock" = {
-          format = "{:%H(%I):%M}";
-        };
-
-        "custom/date" = {
-          format = "{}";
-          return-type = "json";
-          exec = pkgs.writeShellScript "waybar-date" ''
-            while true; do
-              echo "{\"text\": \"`date \"+%u-%a %d-%m(%h)-%Y\"`\", \"class\":[\"date\"]}"
-              sleep 2600
-            done
-          '';
-        };
-
-        "custom/netcheck" = {
-          format = "{}";
-          return-type = "json";
-          exec = pkgs.writeShellScript "waybar-netcheck" ''
-            while true; do
-              if ping example.com -c 1 > /dev/null 2> /dev/null; then
-                echo '{"text": "NET: success", "class": ["netcheck-success", "netcheck"]}'
-              else
-                echo '{"text": "NET: error", "class": ["netcheck-error", "netcheck"]}'
-              fi
-              sleep 5
-           done
-         '';
-        };
-
-        "custom/uname" = {
-          format = "{}";
-          return-type = "json";
-          exec = pkgs.writeShellScript "waybar-uname" ''
-            while true; do
-              echo "{\"text\": \"`uname -r`\", \"class\":[\"uname\"]}"
-              sleep 3600
-            done
-          '';
-        };
-      };
     };
 
-    style = ''
+    programs.waybar = {
+      enable = true;
+      settings = {
+	mainBar = {
+	  layer = "bottom";
+	  positiion = "top";
+	  
+	  modules-left = [ "sway/workspaces" ];
+	  modules-center = [ "sway/window" ];
+	  modules-right = [ "custom/autolock-status" "custom/netcheck" "network#wifi" "network#ethernet" "network#disconnected" "pulseaudio" "memory" "cpu" "battery" "custom/date" "clock" "custom/uname" ];
+    
+	  "cpu" = {
+	    format = "CPU: {usage}%";
+	  };
+
+	  "memory" = {
+	    format = "RAM: {used:0.1f}G/{total:0.1f}G ({percentage}%)";
+	    states = {
+	      "warning" = 70;
+	      "critical" = 90;
+	    };
+	  };
+
+	  "battery" = {
+	    format = "BAT: {capacity}%";
+	    format-charging = "CHR: {capacity}%";
+	    format-plugged = "PLG: {capacity}%";
+	  };
+
+	  "network#ethernet" = {
+	    interface = "enp*";
+	    format-ethernet = "ETHER";
+	    format-wifi = "";
+	    format-disconnected = "";
+	    format-linked = "";
+	  };
+
+	  "network#wifi" = {
+	    interface = "wlp*";
+	    format-ethernet = "";
+	    format-wifi = "WIFI = {essid} ({signalStrength}%)";
+	    format-disconnected = "";
+	  };
+
+	  "network#disconnected" = {
+	    format-ethernet = "";
+	    format-wifi = "";
+	    format-disconnected = "NOCON";
+	  };
+
+	  "pulseaudio" = {
+	    format = "VOL: {volume}%";
+	    format-muted = "MUT: {volume}%";
+	  };
+
+	  "clock" = {
+	    format = "{:%H(%I):%M}";
+	  };
+
+	  "custom/date" = {
+	    format = "{}";
+	    return-type = "json";
+	    exec = pkgs.writeShellScript "waybar-date" ''
+	      while true; do
+		echo "{\"text\": \"`date \"+%u-%a %d-%m(%h)-%Y\"`\", \"class\":[\"date\"]}"
+		sleep 2600
+	      done
+	    '';
+	  };
+
+	  "custom/netcheck" = {
+	    format = "{}";
+	    return-type = "json";
+	    exec = pkgs.writeShellScript "waybar-netcheck" ''
+	      while true; do
+		if ping example.com -c 1 > /dev/null 2> /dev/null; then
+		  echo '{"text": "NET: success", "class": ["netcheck-success", "netcheck"]}'
+		else
+		  echo '{"text": "NET: error", "class": ["netcheck-error", "netcheck"]}'
+		fi
+		sleep 5
+	     done
+	   '';
+	  };
+
+	  "custom/uname" = {
+	    format = "{}";
+	    return-type = "json";
+	    exec = pkgs.writeShellScript "waybar-uname" ''
+	      while true; do
+		echo "{\"text\": \"`uname -r`\", \"class\":[\"uname\"]}"
+		sleep 3600
+	      done
+	    '';
+	  };
+	};
+      };
+
+      style = ''
 @define-color bg-normal transparent;
 @define-color bg-warning #9e824c;
 @define-color bg-critical #f53c3c;
@@ -258,7 +266,7 @@ button:hover {
 #backlight,
 #network,
 #pulseaudio,
-#wireplumber,
+#wireplumbegit reset HEAD~r,
 #custom-media,
 #tray,
 #mode,
@@ -287,8 +295,9 @@ button:hover {
 {
 	background-color: @bg-critical;
 }
-'';
-  };
+  '';
+    };
 
-  home.packages = with pkgs; [ wl-clipboard ];
+    home.packages = with pkgs; [ wl-clipboard ];
+  };
 }

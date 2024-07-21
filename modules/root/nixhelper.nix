@@ -1,9 +1,17 @@
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
-  environment.sessionVariables = {
-    FLAKE = "path:///home/nixer/nixos";
+  options.mynixos.nixhelper = {
+    enable =
+      lib.mkEnableOption "Enable module";
+    flake-path = lib.mkOption { default = "/home/nixer/nixos"; type = lib.types.str; };
   };
 
-  environment.systemPackages = [ pkgs.nh ];
+  config = lib.mkIf config.mynixos.nixhelper.enable {
+    environment.sessionVariables = {
+      FLAKE = "path://${config.mynixos.nixhelper.flake-path}";
+    };
+
+    environment.systemPackages = [ pkgs.nh ];
+  };
 }

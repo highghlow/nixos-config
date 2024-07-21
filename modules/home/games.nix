@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 let wine = pkgs.linkFarm "wine" [ {
 	     name = "bin/wine";
@@ -10,16 +10,23 @@ let wine = pkgs.linkFarm "wine" [ {
 	   } ];
 in
 {
-  home.packages = with pkgs; [
-    (lutris.override {
-       extraPkgs = pkgs: [
-	 gtk3
-       ];
-    })
-    wine
-    wine64
-    wine32
-    winetricks
-    prismlauncher
-  ];
+  options = {
+    mynixos.home.games.enable =
+      lib.mkEnableOption "Enable module";
+  };
+
+  config = lib.mkIf config.mynixos.home.games.enable {
+    home.packages = with pkgs; [
+      (lutris.override {
+	 extraPkgs = pkgs: [
+	   gtk3
+	 ];
+      })
+      wine
+      wine64
+      wine32
+      winetricks
+      prismlauncher
+    ];
+  };
 }

@@ -1,99 +1,105 @@
 { config, pkgs, inputs, lib, ... }:
 
 {
-  programs.nixvim = {
-    enable = true;
+  options = {
+    mynixos.home.neovim.enable =
+      lib.mkEnableOption "Enable module";
+  };
 
-    opts = {
-      number = true;
-      scrolloff = 5;
-      signcolumn = "yes";
-    };
-    
-    clipboard.register = "unnamedplus";
+  config = lib.mkIf config.mynixos.home.neovim.enable {
+    programs.nixvim = {
+      enable = true;
 
-    autoCmd = [
-      {
-	event = [ "BufEnter" "BufWinEnter" ];
-	pattern = [ "*.dart" "*.nix" ];
-	command = "setlocal shiftwidth=2";
-      }
-      {
-	event = [ "BufEnter" "BufWinEnter" ];
-	pattern = [ "*.html" "*.cs" ];
-	command = "setlocal shiftwidth=4";
-      }
-
-    ];
-
-    extraConfigLua = ''
-      vim.cmd([[cnoreabbrev nt NvimTreeFocus]])
-      vim.cmd([[tnoremap <C-\><Esc> <C-\><C-n><Cmd>:FloatermHide<CR>]])
-      vim.cmd([[noremap <C-\><Esc> <Cmd>:FloatermToggle<CR>]])
-
-      vim.cmd([[:nmap ; <Right>]])
-      vim.cmd([[:nmap l <Up>]])
-      vim.cmd([[:nmap k <Down>]])
-      vim.cmd([[:nmap j <Left>]])
-      vim.cmd([[:nnoremap h ;]])
-
-      vim.cmd([[:vmap ; <Right>]])
-      vim.cmd([[:vmap l <Up>]])
-      vim.cmd([[:vmap k <Down>]])
-      vim.cmd([[:vmap j <Left>]])
-      vim.cmd([[:vnoremap h ;]])
-
-      vim.cmd([[:nnoremap <C-w>; <C-w>l]])
-      vim.cmd([[:nnoremap <C-w>l <C-w>k]])
-      vim.cmd([[:nnoremap <C-w>k <C-w>j]])
-      vim.cmd([[:nnoremap <C-w>j <C-w>h]])
-      vim.cmd([[:nnoremap <C-w>h <C-w>;]])
-
-      vim.cmd([[noremap <C-j> <Cmd>:TmuxNavigateLeft<CR>]])
-      vim.cmd([[noremap <C-k> <Cmd>:TmuxNavigateDown<CR>]])
-      vim.cmd([[noremap <C-l> <Cmd>:TmuxNavigateUp<CR>]])
-      vim.cmd([[noremap <Char-0x7777> <Cmd>:TmuxNavigateRight<CR>]])
-    '';
-
-    plugins = {
-      oil.enable = true;
-      treesitter.enable = true;
-      luasnip.enable = true;
-      auto-save.enable = true;
-      autoclose.enable = true;
-      nvim-tree.enable = true;
-
-      lualine = {
-        enable = true;
-	extensions = [
-	  "nvim-tree"
-	];
+      opts = {
+	number = true;
+	scrolloff = 5;
+	signcolumn = "yes";
       };
+      
+      clipboard.register = "unnamedplus";
 
-      lsp = {
-        enable = true;
-	servers = {
-	  lua-ls.enable = true;
-	  rust-analyzer = {
-	    enable = true;
-	    installRustc = true;
-	    installCargo = true;
-	  };
-	  taplo.enable = true;
-	  pyright.enable = true;
-	  omnisharp.enable = true;
-	  nixd.enable = true;
+      autoCmd = [
+	{
+	  event = [ "BufEnter" "BufWinEnter" ];
+	  pattern = [ "*.dart" "*.nix" ];
+	  command = "setlocal shiftwidth=2";
+	}
+	{
+	  event = [ "BufEnter" "BufWinEnter" ];
+	  pattern = [ "*.html" "*.cs" ];
+	  command = "setlocal shiftwidth=4";
+	}
+
+      ];
+
+      extraConfigLua = ''
+	vim.cmd([[cnoreabbrev nt NvimTreeFocus]])
+	vim.cmd([[tnoremap <C-\><Esc> <C-\><C-n><Cmd>:FloatermHide<CR>]])
+	vim.cmd([[noremap <C-\><Esc> <Cmd>:FloatermToggle<CR>]])
+
+	vim.cmd([[:nmap ; <Right>]])
+	vim.cmd([[:nmap l <Up>]])
+	vim.cmd([[:nmap k <Down>]])
+	vim.cmd([[:nmap j <Left>]])
+	vim.cmd([[:nnoremap h ;]])
+
+	vim.cmd([[:vmap ; <Right>]])
+	vim.cmd([[:vmap l <Up>]])
+	vim.cmd([[:vmap k <Down>]])
+	vim.cmd([[:vmap j <Left>]])
+	vim.cmd([[:vnoremap h ;]])
+
+	vim.cmd([[:nnoremap <C-w>; <C-w>l]])
+	vim.cmd([[:nnoremap <C-w>l <C-w>k]])
+	vim.cmd([[:nnoremap <C-w>k <C-w>j]])
+	vim.cmd([[:nnoremap <C-w>j <C-w>h]])
+	vim.cmd([[:nnoremap <C-w>h <C-w>;]])
+
+	vim.cmd([[noremap <C-j> <Cmd>:TmuxNavigateLeft<CR>]])
+	vim.cmd([[noremap <C-k> <Cmd>:TmuxNavigateDown<CR>]])
+	vim.cmd([[noremap <C-l> <Cmd>:TmuxNavigateUp<CR>]])
+	vim.cmd([[noremap <Char-0x7777> <Cmd>:TmuxNavigateRight<CR>]])
+      '';
+
+      plugins = {
+	oil.enable = true;
+	treesitter.enable = true;
+	luasnip.enable = true;
+	auto-save.enable = true;
+	autoclose.enable = true;
+	nvim-tree.enable = true;
+
+	lualine = {
+	  enable = true;
+	  extensions = [
+	    "nvim-tree"
+	  ];
 	};
-      };
 
-      cmp = {
-	enable = true;
-	autoEnableSources = true;
-	settings = {
-	  sources =
-	    [ { name = "nvim_lsp"; } { name = "path"; } { name = "buffer"; } ];
-	  mapping = {
-	    "<M-CR>" = ''
+	lsp = {
+	  enable = true;
+	  servers = {
+	    lua-ls.enable = true;
+	    rust-analyzer = {
+	      enable = true;
+	      installRustc = true;
+	      installCargo = true;
+	    };
+	    taplo.enable = true;
+	    pyright.enable = true;
+	    omnisharp.enable = true;
+	    nixd.enable = true;
+	  };
+	};
+
+	cmp = {
+	  enable = true;
+	  autoEnableSources = true;
+	  settings = {
+	    sources =
+	      [ { name = "nvim_lsp"; } { name = "path"; } { name = "buffer"; } ];
+	    mapping = {
+	      "<M-CR>" = ''
 cmp.mapping(function(fallback)
   luasnip = require("luasnip")
   if cmp.visible() then
@@ -108,8 +114,8 @@ cmp.mapping(function(fallback)
     fallback()
   end
 end)
-'';
-	    "<Tab>" = ''
+  '';
+	      "<Tab>" = ''
 cmp.mapping(function(fallback)
   luasnip = require("luasnip")
   if cmp.visible() then
@@ -120,8 +126,8 @@ cmp.mapping(function(fallback)
     fallback()
   end
 end, { "i", "s" })
-'';
-	    "<S-Tab>" = ''
+  '';
+	      "<S-Tab>" = ''
 cmp.mapping(function(fallback)
   luasnip = require("luasnip")
   if cmp.visible() then
@@ -132,54 +138,55 @@ cmp.mapping(function(fallback)
     fallback()
   end
 end, { "i", "s" })
-'';
+  '';
+	    };
+	  };
+	};
+
+	trouble.settings = {
+	  auto_open = true;
+	  auto_close = true;
+	};
+
+	floaterm = {
+	  enable = true;
+	  title = "Terminal";
+	  height = 0.9;
+	  width = 0.9;
+	};
+
+	tmux-navigator = {
+	  enable = true;
+	  settings = {
+	    no_mappings = true;
+	    mapping = {
+	      "<C-j>" = ''
+		vim.cmd([[:TmuxNavigateLeft]])
+	      '';
+	      "<C-k>" = ''
+		vim.cmd([[:TmuxNavigateDown]])
+	      '';
+	      "<C-l>" = ''
+		vim.cmd([[:TmuxNavigateUp]])
+	      '';
+	      "<Char-0x7777>" = ''
+		vim.cmd([[:TmuxNavigateRight]])
+	      '';
+	    };
 	  };
 	};
       };
 
-      trouble.settings = {
-	auto_open = true;
-	auto_close = true;
-      };
-
-      floaterm = {
-        enable = true;
-	title = "Terminal";
-	height = 0.9;
-	width = 0.9;
-      };
-
-      tmux-navigator = {
-        enable = true;
-	settings = {
-	  no_mappings = true;
-	  mapping = {
-	    "<C-j>" = ''
-	      vim.cmd([[:TmuxNavigateLeft]])
-	    '';
-	    "<C-k>" = ''
-	      vim.cmd([[:TmuxNavigateDown]])
-	    '';
-	    "<C-l>" = ''
-	      vim.cmd([[:TmuxNavigateUp]])
-	    '';
-	    "<Char-0x7777>" = ''
-	      vim.cmd([[:TmuxNavigateRight]])
-	    '';
-	  };
-	};
+      highlight = {
+	MatchParen.bg = "#444444";
       };
     };
 
-    highlight = {
-      MatchParen.bg = "#444444";
-    };
+    home.packages = with pkgs; [
+      mono
+    ];
+
+    programs.nixvim.colorschemes.base16.colorscheme.base00 = 
+      lib.mkForce "#181818";
   };
-
-  home.packages = with pkgs; [
-    mono
-  ];
-
-  programs.nixvim.colorschemes.base16.colorscheme.base00 = 
-    lib.mkForce "#181818";
 }

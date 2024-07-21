@@ -1,11 +1,18 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
-  virtualisation.docker = {
-    enable = true;
-    rootless = {
+  options = {
+    mynixos.docker.enable =
+      lib.mkEnableOption "Enable module";
+  };
+
+  config = lib.mkIf config.mynixos.docker.enable {
+    virtualisation.docker = {
       enable = true;
-      setSocketVariable = true;
+      rootless = {
+	enable = true;
+	setSocketVariable = true;
+      };
     };
   };
 }

@@ -11,23 +11,30 @@ let gparted = let patched = (
 ); in pkgs.writeShellScriptBin "gparted" "sudo -E ${pkgs.gparted}/bin/gparted";
 in
 {
-  environment.systemPackages = with pkgs; [
-    gparted
+  options = {
+    mynixos.gparted.enable =
+      lib.mkEnableOption "Enable module";
+  };
 
-    exfat
-    exfatprogs
-    btrfs-progs
-    e2fsprogs
-    f2fs-tools
-    dosfstools
-    hfsprogs
-    jfsutils
-    mdadm
-    util-linux
-    nilfs-utils
-    ntfsprogs
-    reiser4progs
-    udftools
-    xfsprogs
-  ];
+  config = lib.mkIf config.mynixos.gparted.enable {
+    environment.systemPackages = with pkgs; [
+      gparted
+
+      exfat
+      exfatprogs
+      btrfs-progs
+      e2fsprogs
+      f2fs-tools
+      dosfstools
+      hfsprogs
+      jfsutils
+      mdadm
+      util-linux
+      nilfs-utils
+      ntfsprogs
+      reiser4progs
+      udftools
+      xfsprogs
+    ];
+  };
 }

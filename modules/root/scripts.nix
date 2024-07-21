@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, config, lib, ... }:
 
 let
   edit-nix-config = pkgs.writeShellScriptBin "edit-nix-config" ''
@@ -16,5 +16,12 @@ let
     popd
   '';
 in {
-  environment.systemPackages = [ edit-nix-config ];
+  options = {
+    mynixos.scripts.enable =
+      lib.mkEnableOption "Enable module";
+  };
+
+  config = lib.mkIf config.mynixos.scripts.enable {
+    environment.systemPackages = [ edit-nix-config ];
+  };
 }
