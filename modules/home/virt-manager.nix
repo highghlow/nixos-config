@@ -36,7 +36,15 @@ in
 	    storage_vol = { pool = "default"; volume = "win11.qcow2"; };
 	    install_vol = /home/nixer/.local/share/libvirt/isos/win11.iso;
 	    nvram_path = /home/nixer/.local/share/libvirt/nvram/win11.nvram;
-	  });
+	    install_virtio = true;
+	  } // {
+	    vcpu.count = 6;
+	    filesystem  = {
+	      driver = { type = "virtiofs"; queue=1024; };
+	      source.dir = "/home/nixer/.local/share/libvirt/shared/win11";
+	      target.dir = "shared";
+	    };
+	  } );
       }
       {
 	definition = inputs.nixvirt.lib.domain.writeXML (inputs.nixvirt.lib.domain.templates.pc
