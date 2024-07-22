@@ -17,6 +17,7 @@
 	allowedTCPPortRanges = [ 
 	  { from = 5900; to = 5999; }
 	];
+	allowedTCPPorts = [ 53317 ];
       };
     }
     (lib.mkIf cfg.wireless {
