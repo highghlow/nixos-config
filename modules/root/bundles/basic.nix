@@ -24,7 +24,7 @@
       zsh.enable = true;
       network.enable = lib.mkDefault cfg.network;
       network.wireless = cfg.wireless;
-      newtork.firewall = cfg.firewall;
+      network.firewall = cfg.firewall;
       systemd-boot.enable = cfg.bootloader == "systemd-boot";
       grub.enable = cfg.bootloader == "grub";
     };
