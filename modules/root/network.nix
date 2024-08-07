@@ -6,6 +6,8 @@
       lib.mkEnableOption "Enable module";
     mynixos.network.wireless =
       lib.mkEnableOption "Enable wireless";
+    mynixos.network.firewall =
+      lib.mkEnableOption "firewall";
   };
 
   config = let cfg = config.mynixos.network;
@@ -13,7 +15,7 @@
     {
       networking.networkmanager.enable = true;
       networking.firewall = {
-	enable = true;
+	enable = cfg.firewall;
 	allowedTCPPortRanges = [ 
 	  { from = 5900; to = 5999; }
 	];

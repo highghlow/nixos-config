@@ -7,6 +7,7 @@
     bootloader = lib.mkOption { default = null; type = lib.types.enum ["grub" "systemd-boot"]; };
     network = lib.mkOption { default = true; type = lib.types.bool; };
     wireless = lib.mkOption { default = false; type = lib.types.bool; };
+    firewall = lib.mkOption { default = false; type = lib.types.bool; };
   };
 
   config = let cfg = config.mynixos.bundle.basic;
@@ -23,6 +24,7 @@
       zsh.enable = true;
       network.enable = lib.mkDefault cfg.network;
       network.wireless = cfg.wireless;
+      newtork.firewall = cfg.firewall;
       systemd-boot.enable = cfg.bootloader == "systemd-boot";
       grub.enable = cfg.bootloader == "grub";
     };
