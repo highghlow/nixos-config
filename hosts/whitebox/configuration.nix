@@ -29,6 +29,7 @@
     libvirt.enable = true;
     searx.enable = true;
     gparted.enable = true;
+    waydroid.enable = true;
   };
 
   hardware.opengl.extraPackages = with pkgs; [
