@@ -22,8 +22,7 @@ in
 	   gtk3
 	 ];
       })
-      wine
-      wine64
+      wineWow64Packages.full
       wine32
       winetricks
       prismlauncher
