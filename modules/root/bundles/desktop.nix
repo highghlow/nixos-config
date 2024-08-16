@@ -22,6 +22,7 @@
 	autologin = cfg.autologin;
 	defaultSession = "${pkgs.sway}/bin/sway";
       };
+      sway.enable = cfg.environment == "sway";
       pipewire.enable = cfg.environment == "sway";
     };
   };
