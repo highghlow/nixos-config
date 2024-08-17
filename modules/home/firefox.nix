@@ -4,6 +4,7 @@
   options.mynixos.home.firefox = {
     enable =
       lib.mkEnableOption "Enable module";
+    titlebar = lib.mkEnableOption "titlebar";
     search = lib.mkOption { default = "duckduckgo"; type = lib.types.enum [ "duckduckgo" "searx" ]; };
   };
 
@@ -63,6 +64,8 @@
 	  "privacy.clearOnShutdown.cookies" = false;
 	  "privacy.clearOnShutdown.sessions" = false;
 	  "dom.security.https_only_mode" = true;
+
+	  "browser.tabs.inTitlebar" = if cfg.titlebar then 0 else 1;
 	};
 	extensions = with config.nur.repos.rycee.firefox-addons; [
 	  ublock-origin

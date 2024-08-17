@@ -15,6 +15,12 @@
       polkit-auth.enable = (cfg.environment == "sway");
 
       gnome.enable = (cfg.environment == "gnome");
+      firefox.titlebar = lib.mkDefault (
+        if cfg.environment == "gnome" then
+	  true
+	else
+	  false
+      );
     };
   };
 }
