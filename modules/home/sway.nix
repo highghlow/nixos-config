@@ -298,6 +298,6 @@ button:hover {
   '';
     };
 
-    home.packages = with pkgs; [ wl-clipboard ];
+    home.packages = with pkgs; [ wl-clipboard feh ];
   };
 }
