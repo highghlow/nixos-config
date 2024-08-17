@@ -13,6 +13,8 @@
       alacritty.enable = (cfg.environment == "sway");
       sway.enable = (cfg.environment == "sway");
       polkit-auth.enable = (cfg.environment == "sway");
+
+      gnome.enable = (cfg.environment == "gnome");
     };
   };
 }

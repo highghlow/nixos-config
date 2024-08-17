@@ -15,7 +15,7 @@
       basic.enable = true;
       desktop = {
         enable = true;
-	environment = "sway";
+	environment = "gnome";
       };
       neovim = {
         enable = true;

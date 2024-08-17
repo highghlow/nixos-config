@@ -4,6 +4,8 @@
   options = {
     mynixos.gnome.enable =
       lib.mkEnableOption "Enable module";
+    mynixos.gnome.autologin =
+      lib.mkEnableOption "autologin";
   };
 
   config = lib.mkIf config.mynixos.gnome.enable {
@@ -14,10 +16,13 @@
     };
 
     services.displayManager.autoLogin = {
-      enable = true;
+      enable = config.mynixos.gnome.autologin;
       user = "nixer";
     };
 
+    environment.systemPackages = with pkgs.gnome; [
+      gnome-tweaks
+    ];
 
     environment.gnome.excludePackages = (with pkgs; [
       gnome-photos
