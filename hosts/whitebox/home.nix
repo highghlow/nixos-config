@@ -22,14 +22,7 @@
 	tmux = true;
 	ctrl-semicolon-bypass = true;
       };
-      apps = {
-        communication = true;
-	games = true;
-	passwd = true;
-	vm = true;
-	transmission = true;
-	firefox = true;
-      };
+      apps.all = true;
     };
 
     firefox = {
