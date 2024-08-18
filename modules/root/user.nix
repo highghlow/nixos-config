@@ -4,8 +4,8 @@
   options = {
     mynixos.user.enable =
       lib.mkEnableOption "Enable module";
-    mynixos.user.password = lib.mkOption { default = null; type = lib.types.str; };
-    mynixos.user.passwordFile = lib.mkOption { default = null; type = lib.types.str; };
+    mynixos.user.password = lib.mkOption { default = ""; type = lib.types.str; };
+    mynixos.user.passwordFile = lib.mkOption { default = ""; type = lib.types.str; };
   };
 
   config = lib.mkIf config.mynixos.user.enable {
