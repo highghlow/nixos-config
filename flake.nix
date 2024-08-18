@@ -21,6 +21,7 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    agenix.url = "github:ryantm/agenix";
     hw-config = {
       url = "file:///etc/nixos/hardware-configuration.nix";
       type = "file";
@@ -28,7 +29,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, nur, stylix, nixvim, disko, hw-config, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, nur, stylix, nixvim, disko, agenix, hw-config, ... }@inputs: {
     nixosConfigurations = {
       nixos = nixpkgs.lib.nixosSystem {
 	system = "x86_64-linux";
@@ -53,6 +54,34 @@
 	      inputs.nixvirt.homeModules.default
 	    ];
 	    home-manager.users.nixer = import ./hosts/whitebox/home.nix;
+	  }
+	];
+      };
+      laptop = nixpkgs.lib.nixosSystem {
+	system = "x86_64-linux";
+	specialArgs = { inherit inputs; };
+	modules = [
+	  nur.nixosModules.nur
+	  stylix.nixosModules.stylix
+	  inputs.nixvirt.nixosModules.default
+	  disko.nixosModules.disko
+	  agenix.nixosModules.default
+
+	  ./colorscheme.nix
+	  ./hosts/laptop/configuration.nix
+	  ./hosts/laptop/disk-config.nix
+	  ./hosts/laptop/hardware-configuration.nix
+
+	  home-manager.nixosModules.home-manager {
+	    home-manager.useGlobalPkgs = true;
+	    home-manager.useUserPackages = true;
+	    home-manager.extraSpecialArgs = {inherit inputs;};
+	    home-manager.sharedModules = [
+	      nixvim.homeManagerModules.nixvim
+	      nur.nixosModules.nur
+	      inputs.nixvirt.homeModules.default
+	    ];
+	    home-manager.users.nixer = import ./hosts/laptop/home.nix;
 	  }
 	];
       };
