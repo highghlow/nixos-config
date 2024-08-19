@@ -8,6 +8,7 @@
     network = lib.mkOption { default = true; type = lib.types.bool; };
     wireless = lib.mkOption { default = false; type = lib.types.bool; };
     firewall = lib.mkOption { default = false; type = lib.types.bool; };
+    power-mgmt = lib.mkOption { default = false; type = lib.types.bool; };
   };
 
   config = let cfg = config.mynixos.bundle.basic;
@@ -27,6 +28,7 @@
       network.firewall = cfg.firewall;
       systemd-boot.enable = cfg.bootloader == "systemd-boot";
       grub.enable = cfg.bootloader == "grub";
+      power-mgmt.enable = cfg.power-mgmt;
     };
   };
 }

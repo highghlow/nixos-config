@@ -12,6 +12,7 @@
         enable = true;
 	bootloader = "grub";
 	wireless = true;
+	power-mgmt = true;
       };
       desktop = {
         enable = true;
