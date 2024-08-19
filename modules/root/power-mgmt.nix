@@ -10,6 +10,7 @@
   };
 
   config = lib.mkIf config.mynixos.power-mgmt.enable {
+    services.power-profiles-daemon.enable = false;
     services.tlp = {
       enable = true;
       settings = {
