@@ -7,6 +7,6 @@
   };
 
   config = lib.mkIf config.mynixos.home.transmission.enable {
-    home.packages = with pkgs; [ transmission-qt ];
+    home.packages = with pkgs; [ transmission_4-qt ];
   };
 }

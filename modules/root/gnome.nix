@@ -20,7 +20,7 @@
       user = "nixer";
     };
 
-    environment.systemPackages = with pkgs.gnome; [
+    environment.systemPackages = with pkgs; [
       gnome-tweaks
     ];
 
@@ -28,14 +28,14 @@
       gnome-photos
       gnome-tour
       gedit # text editor
-    ]) ++ (with pkgs.gnome; [
       cheese # webcam tool
-      gnome-music
       epiphany # web browser
       geary # email reader
       evince # document viewer
-      gnome-characters
       totem # video player
+    ]) ++ (with pkgs.gnome; [
+      gnome-music
+      gnome-characters
       tali # poker game
       iagno # go game
       hitori # sudoku game
