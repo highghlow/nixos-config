@@ -18,6 +18,7 @@
 	userEmail = "highghlow@proton.me";
 	extraConfig = {
 	  init.defaultBranch = "main";
+	  pull.rebase = true;
 	};
       };
     }
