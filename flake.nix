@@ -22,14 +22,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     agenix.url = "github:ryantm/agenix";
-    hw-config = {
-      url = "file:///etc/nixos/hardware-configuration.nix";
-      type = "file";
-      flake = false;
-    };
   };
 
-  outputs = { self, nixpkgs, home-manager, nur, stylix, nixvim, disko, agenix, hw-config, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, nur, stylix, nixvim, disko, agenix, ... }@inputs: {
     nixosConfigurations = {
       nixos = nixpkgs.lib.nixosSystem {
 	system = "x86_64-linux";
@@ -42,7 +37,7 @@
 	  ./colorscheme.nix
 	  ./hosts/whitebox/configuration.nix
 	  ./nogit/configuration.nix
-	  hw-config.outPath
+	  ./nogit/hw-conf.nix
 
 	  home-manager.nixosModules.home-manager {
 	    home-manager.useGlobalPkgs = true;
@@ -57,7 +52,7 @@
 	  }
 	];
       };
-      laptop = nixpkgs.lib.nixosSystem {
+      laptop = nixpkgs.lib.nixosSystem rec {
 	system = "x86_64-linux";
 	specialArgs = { inherit inputs; };
 	modules = [
