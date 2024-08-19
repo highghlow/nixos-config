@@ -9,6 +9,7 @@
     vm = lib.mkEnableOption "virtual machines";
     transmission = lib.mkEnableOption "transmission";
     firefox = lib.mkEnableOption "firefox";
+    davinci-resolve = lib.mkEnableOption "Davinci Resolve";
     obsidian = lib.mkEnableOption "obsidian";
     gimp = lib.mkEnableOption "gimp";
     libreoffice = lib.mkEnableOption "libreoffice";
@@ -31,6 +32,8 @@
       virt-manager.enable = cfg.vm || cfg.all;
 
       firefox.enable = cfg.firefox || cfg.all;
+
+      davinci-resolve.enable = cfg.davinci-resolve || cfg.all;
     };
 
     home = 

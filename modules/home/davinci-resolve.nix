@@ -117,6 +117,22 @@
     in
     {
       home.packages = [ patched-davinci ];
+
+      xdg.desktopEntries = {
+	davinci-resolve = {
+          name = "Davinci Resolve";
+          genericName = "Video Editor";
+          icon = ./images/davinci-resolve-icon.tif;
+          comment = "Professional video editing, color, effects and audio post-processing";
+          categories = [
+            "AudioVideo"
+            "AudioVideoEditing"
+            "Video"
+            "Graphics"
+          ];
+          exec = "patched-davinci";
+        };
+      };
     }
   );
 }
