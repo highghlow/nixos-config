@@ -116,7 +116,7 @@
       };
     in
     {
-      home.packages = [ patched-davinci ];
+      home.packages = [ patched-davinci pkgs.audacity ];
 
       xdg.desktopEntries = {
 	davinci-resolve = {
