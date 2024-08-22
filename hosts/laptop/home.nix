@@ -24,6 +24,7 @@
 	libreoffice = true;
 	mpv = true;
 	unity = true;
+	localsend = true;
       };
       neovim.enable = true;
     };

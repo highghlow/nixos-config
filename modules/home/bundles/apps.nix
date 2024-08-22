@@ -15,6 +15,7 @@
     libreoffice = lib.mkEnableOption "libreoffice";
     mpv = lib.mkEnableOption "mpv";
     unity = lib.mkEnableOption "unity";
+    localsend = lib.mkEnableOption "localsend";
   };
 
   config = let cfg = config.mynixos.home.bundle.apps;
@@ -45,6 +46,7 @@
       (pkg cfg.libreoffice pkgs.libreoffice-fresh)
       (pkg cfg.unity pkgs.unityhub)
       (pkg cfg.mpv pkgs.mpv)
+      (pkg cfg.localsend pkgs.localsend)
     ];
   };
 }
