@@ -23,7 +23,21 @@
       };
     }
     (lib.mkIf cfg.lazygit {
-      home.packages = [ pkgs.lazygit ];
+      programs.lazygit = {
+        enable = true;
+	settings = {
+	  git.disableForcePushing = true;
+	  keybinding.universal = {
+	    prevBlock-alt = "j";
+	    nextItem-alt = "k";
+	    prevItem-alt = "l";
+	    nextBlock-alt = ";";
+
+	    # scrollLeft = "J";
+	    # scrollRight = ":";
+	  };
+	};
+      };
     })
   ]);
 }
