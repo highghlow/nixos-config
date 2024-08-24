@@ -17,6 +17,14 @@ in
   config = lib.mkIf config.mynixos.home.sway.enable {
     mynixos.home.alacritty.enable = true;
 
+    dconf = {
+      enable = true;
+      settings = {
+        "org/gnome/desktop/interface".color-scheme = lib.mkForce "prefer-dark";
+      };
+    };
+    home.sessionVariables = { GTK_THEME = "Adwaita:dark"; }; 
+
     wayland.windowManager.sway = {
       enable = true;
       config = {
@@ -27,7 +35,7 @@ in
 	up = "l";
 	right = "semicolon";
 	
-	menu = "${pkgs.bemenu}/bin/bemenu-run -H 24 --no-exec | xargs swaymsg exec --";     
+	menu = "${pkgs.bemenu}/bin/bemenu-run -H 24 --no-exec | xargs swaymsg exec GTK_THEME=Adwaita:dark --";     
    
 	keybindings =
 	  let
