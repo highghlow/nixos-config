@@ -19,7 +19,7 @@
       remote-control.enable = true;
       desktop = {
         enable = true;
-        environment = "gnome";
+        environment = "sway";
 	bluetooth = true;
 	autologin = true;
       };
