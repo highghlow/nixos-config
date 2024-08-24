@@ -54,6 +54,8 @@
 	  force = true;
 	};
 	settings = {
+	  "extensions.activeThemeID" = "firefox-compact-dark@mozilla.org";
+
 	  "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
 	  "browser.toolbars.bookmarks.visibility" = "never";
 	  "signon.rememberSignons" = false;
