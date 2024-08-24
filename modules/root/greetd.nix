@@ -11,8 +11,8 @@
 
   config = let cfg = config.mynixos.greetd;
   in lib.mkIf cfg.enable {
-    hardware.opengl.enable = true;
-    hardware.opengl.driSupport32Bit = true;
+    hardware.graphics.enable = true;
+    hardware.graphics.enable32Bit = true;
     services.greetd = lib.mkMerge [
       {
 	enable = true;
