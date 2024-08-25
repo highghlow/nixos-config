@@ -1,4 +1,4 @@
-{ config, ... }:
+{ pkgs, config, ... }:
 
 {
   imports =
@@ -26,6 +26,10 @@
     };
     user.passwordFile = config.age.secrets.user-password.path;
   };
+
+  hardware.graphics.extraPackages = with pkgs; [
+    rocmPackages.clr.icd
+  ];
 
   age.secrets.user-password.file = ./user-password.age;
 
