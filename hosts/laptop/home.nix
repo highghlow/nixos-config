@@ -25,6 +25,7 @@
 	mpv = true;
 	unity = true;
 	localsend = true;
+	davinci-resolve = true;
       };
       neovim.enable = true;
     };
