@@ -33,6 +33,7 @@
       geary # email reader
       evince # document viewer
       totem # video player
+      yelp # help app
     ]) ++ (with pkgs.gnome; [
       gnome-music
       gnome-characters
@@ -41,5 +42,7 @@
       hitori # sudoku game
       atomix # puzzle game
     ]);
+
+    services.xserver.excludePackages = [ pkgs.xterm ];
   };
 }

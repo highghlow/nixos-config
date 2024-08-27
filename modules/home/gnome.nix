@@ -28,6 +28,8 @@
 	"org/gnome/desktop/interface".cursor-theme = lib.mkForce "Adwaita";
 
 	"org/gnome/desktop/wm/preferences".focus-mode = "sloppy";
+
+	"org/gnome/shell".enabled-extensions = ["launch-new-instance@gnome-shell-extensions.gcampax.github.com" "drive-menu@gnome-shell-extensions.gcampax.github.com" "system-monitor@gnome-shell-extensions.gcampax.github.com"];
       };
     };
   };
