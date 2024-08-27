@@ -21,7 +21,7 @@
       autoCmd = [
 	{
 	  event = [ "BufEnter" "BufWinEnter" ];
-	  pattern = [ "*.dart" "*.nix" ];
+	  pattern = [ "*.dart" "*.nix" "*.css" "*.js" ];
 	  command = "setlocal shiftwidth=2";
 	}
 	{
