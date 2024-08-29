@@ -58,6 +58,47 @@ in
 	  });
       }
       {
+        definition = inputs.nixvirt.lib.domain.writeXML (
+	  lib.recursiveUpdate
+	    (
+	      inputs.nixvirt.lib.domain.templates.pc
+	      {
+		name = "Redox OS";
+		uuid = "4fde7cae-454c-4eb2-8ba6-5869c005907c";
+		memory = { count = 5; unit = "GiB"; };
+		virtio_drive = false;
+	      }
+	    )
+	    ({
+	      devices.disk = [
+		{
+		  type = "volume";
+		  device = "disk";
+		  driver = {
+		    name = "qemu";
+		    type = "raw";
+		  };
+		  source = {
+		    pool = "default";
+		    volume = "redox.img";
+		  };
+		  target = {
+		    dev = "sda";
+		    bus = "sata";
+		  };
+		  address = {
+		    type = "drive";
+		    controller = 0;
+		    bus = 0;
+		    target = 0;
+		    unit = 0;
+		  };
+		}
+	      ];
+	    })
+	);
+      }
+      {
 	definition = inputs.nixvirt.lib.domain.writeXML {
 	  name = "Mac OS";
 	  type = "kvm";

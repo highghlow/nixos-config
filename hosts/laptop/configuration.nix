@@ -24,6 +24,7 @@
       efi = true;
       removable = true;
     };
+    libvirt.enable = true;
     user.passwordFile = config.age.secrets.user-password.path;
   };
 

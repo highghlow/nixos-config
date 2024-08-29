@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 
 {
@@ -20,18 +20,15 @@
     '';
     environment.systemPackages = with pkgs; [ qemu ];
 
-    systemd.services.libvirt-network = {
-      description = "Enable virbr0 for libvirt";
-      wantedBy = [ "multi-user.target" ];
-      after = [ "network.target" ];
-      serviceConfig = {
-	Type = "oneshot";
-	ExecStart = "${pkgs.writeShellScript "libvirt-network" ''
-	  if virsh net-info default | grep "Active:" | grep "yes"; then
-	    ${pkgs.libvirt}/bin/virsh net-start default || true
-	  fi
-	''}";
-      };
-    };
+    virtualisation.libvirt.connections."qemu:///system".networks =
+    [
+      {
+        definition = inputs.nixvirt.lib.network.writeXML (inputs.nixvirt.lib.network.templates.bridge {
+	  uuid = "dd9132c8-0ea7-4848-a303-2ea1fc0d2201";
+	  subnet_byte = 71;
+	});
+	active = true;
+      }
+    ];
   };
 }
