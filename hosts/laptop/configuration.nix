@@ -25,6 +25,7 @@
       removable = true;
     };
     libvirt.enable = true;
+    searx.enable = true;
     user.passwordFile = config.age.secrets.user-password.path;
   };
 

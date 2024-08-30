@@ -30,6 +30,7 @@
       };
       neovim.enable = true;
     };
+    firefox.search = "searx";
   };
 
   home.stateVersion = "23.11";
