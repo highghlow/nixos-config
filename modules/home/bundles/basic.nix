@@ -12,6 +12,7 @@
       git.enable = true;
       zsh.enable = true;
       comma.enable = true;
+      scripts.enable = true;
     };
   };
 }
