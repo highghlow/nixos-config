@@ -29,6 +29,7 @@
 
 	"org/gnome/desktop/wm/preferences".focus-mode = "sloppy";
 
+        "org/gnome/shell".disable-user-extensions = false;
 	"org/gnome/shell".enabled-extensions = ["launch-new-instance@gnome-shell-extensions.gcampax.github.com" "drive-menu@gnome-shell-extensions.gcampax.github.com" "system-monitor@gnome-shell-extensions.gcampax.github.com"];
       };
     };
