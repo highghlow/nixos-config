@@ -23,6 +23,7 @@
 
 	  "org/gnome/Console".use-system-font = false;
 	  "org/gnome/Console".custom-font = "Hack Nerd Font Mono 12";
+	  "org/gnome/Console".font-scale = 1.0;
 
 	  "org/gnome/settings-daemon/plugins/power".sleep-inactive-ac-type = "nothing";
 	  "org/gnome/settings-daemon/plugins/power".power-button-action = "interactive";

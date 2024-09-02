@@ -36,6 +36,11 @@
       vim.cmd([[:vmap k <Down>]])
       vim.cmd([[:vmap j <Left>]])
       vim.cmd([[:vnoremap h ;]])
+
+      vim.cmd([[nnoremap <silent> <C-w>> <Cmd>:vertical resize +5<CR>]])
+      vim.cmd([[nnoremap <silent> <C-w>< <Cmd>:vertical resize -5<CR>]])
+      vim.cmd([[nnoremap <silent> <C-w>+ <Cmd>:resize +5<CR>]])
+      vim.cmd([[nnoremap <silent> <C-w>- <Cmd>:resize -5<CR>]])
     '';
 
     highlight = {
