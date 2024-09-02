@@ -9,6 +9,9 @@
   };
 
   config = lib.mkIf config.mynixos.gnome.enable {
+    programs.ydotool.enable = true;
+    users.users.nixer.extraGroups = ["ydotool"];
+
     services.xserver = {
       enable = true;
       displayManager.gdm.enable = true;

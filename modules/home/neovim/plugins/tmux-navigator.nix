@@ -13,6 +13,7 @@
       vim.cmd([[noremap <C-k> <Cmd>:TmuxNavigateDown<CR>]])
       vim.cmd([[noremap <C-l> <Cmd>:TmuxNavigateUp<CR>]])
       vim.cmd([[noremap <Char-0x7777> <Cmd>:TmuxNavigateRight<CR>]])
+      vim.cmd([[noremap <C-p> <Cmd>:TmuxNavigateRight<CR>]])
     '';
     plugins.tmux-navigator = {
       enable = true;

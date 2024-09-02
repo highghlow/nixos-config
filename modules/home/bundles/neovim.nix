@@ -14,6 +14,7 @@
       neovim.enable = true;
       tmux.enable = cfg.tmux;
       alacritty.ctrl-semicolon-bypass = cfg.ctrl-semicolon-bypass;
+      gnome.ctrl-semicolon-bypass = cfg.ctrl-semicolon-bypass;
     };
   };
 }
