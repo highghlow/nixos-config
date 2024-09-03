@@ -7,9 +7,17 @@
       expandtab = true;
       scrolloff = 5;
       signcolumn = "yes";
+      guifont = "Hack Nerd Font Mono:h12";
+      winblend = 100;
+    };
+
+    globals = {
+      neovide_floating_blur_amount_x = 20.0;
+      neovide_floating_blur_amount_y = 20.0;
     };
 
     clipboard.register = "unnamedplus";
+    
 
     autoCmd = [
       {
@@ -45,6 +53,11 @@
 
     highlight = {
       MatchParen.bg = "#444444";
+      TermCursor = {
+        blend = 20;
+        guibg = "white";
+        guifg = "black";
+      };
     };
 
     colorschemes.base16.colorscheme.base00 = 

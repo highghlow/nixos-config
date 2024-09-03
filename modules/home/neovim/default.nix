@@ -15,6 +15,6 @@
 
   config = lib.mkIf config.mynixos.home.neovim.enable {
     programs.nixvim.enable = true;
-
+    home.packages = [ pkgs.neovide ];
   };
 }

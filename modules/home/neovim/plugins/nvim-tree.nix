@@ -23,7 +23,16 @@
       };
       updateFocusedFile.enable = true;
       view = {
-        float.enable = true;
+        float = {
+          enable = true;
+          openWinConfig = {
+            border = "rounded";
+            col = 1;
+            relative = "cursor";
+            row = 1;
+            style = "minimal";
+          };
+        };
         centralizeSelection = true;
         cursorline = true;
       };
