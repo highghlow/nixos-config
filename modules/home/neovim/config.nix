@@ -55,8 +55,8 @@
       MatchParen.bg = "#444444";
       TermCursor = {
         blend = 20;
-        guibg = "white";
-        guifg = "black";
+        bg = "white";
+        fg = "black";
       };
     };
 
