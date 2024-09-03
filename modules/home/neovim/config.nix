@@ -33,22 +33,16 @@
     ];
 
     extraConfigLua = ''
-      vim.cmd([[:nmap ; <Right>]])
-      vim.cmd([[:nmap l <Up>]])
-      vim.cmd([[:nmap k <Down>]])
-      vim.cmd([[:nmap j <Left>]])
-      vim.cmd([[:nnoremap h ;]])
+      vim.keymap.set({"n", "v"}, ";", "<Right>")
+      vim.keymap.set({"n", "v"}, "l", "<Up>")
+      vim.keymap.set({"n", "v"}, "k", "<Down>")
+      vim.keymap.set({"n", "v"}, "j", "<Left>")
+      vim.keymap.set({"n", "v"}, "h", ";", { remap = false })
 
-      vim.cmd([[:vmap ; <Right>]])
-      vim.cmd([[:vmap l <Up>]])
-      vim.cmd([[:vmap k <Down>]])
-      vim.cmd([[:vmap j <Left>]])
-      vim.cmd([[:vnoremap h ;]])
-
-      vim.cmd([[nnoremap <silent> <C-w>> <Cmd>:vertical resize +5<CR>]])
-      vim.cmd([[nnoremap <silent> <C-w>< <Cmd>:vertical resize -5<CR>]])
-      vim.cmd([[nnoremap <silent> <C-w>+ <Cmd>:resize +5<CR>]])
-      vim.cmd([[nnoremap <silent> <C-w>- <Cmd>:resize -5<CR>]])
+      vim.keymap.set("n", "<C-w>>", "<Cmd>:vertical resize +5<CR>", { silent = true; })
+      vim.keymap.set("n", "<C-w><", "<Cmd>:vertical resize -5<CR>", { silent = true; })
+      vim.keymap.set("n", "<C-w>+", "<Cmd>:resize +5<CR>", { silent = true; })
+      vim.keymap.set("n", "<C-w>-", "<Cmd>:resize -5<CR>", { silent = true; })
     '';
 
     highlight = {
